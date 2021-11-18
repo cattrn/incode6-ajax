@@ -1,9 +1,8 @@
 console.log(movie_id)
 
+// load data for single movie onto the page
 $.getJSON(API_BASE_URL + `/movie/${movie_id}`, apiOptions)
 .then((movie) => {
-  console.log(movie)
-
   $("#title").text(movie.title)
   $("#poster").attr({
     src: IMAGE_BASE_URL + movie.poster_path,
@@ -19,4 +18,27 @@ $.getJSON(API_BASE_URL + `/movie/${movie_id}`, apiOptions)
 .catch((error) => {
   console.log(error)
   $("main").append("There was an error")
+})
+
+
+// handle comment form submission
+$("#comment-form").submit((e) => {
+  e.preventDefault()
+
+  $.post(`/movies/${movie_id}`, {
+    comment: $("#comment").val()
+  })
+  .then((response) => {
+    const html = `
+    <div>
+      <p><strong>${response.comment}</strong></p>
+      <p>${response.created_at}</p>
+    </div>
+    `
+
+    $("#comments").prepend(html)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 })
