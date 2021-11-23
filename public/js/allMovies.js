@@ -1,4 +1,6 @@
-$.getJSON(API_BASE_URL + '/discover/movie', apiOptions)
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w342'
+
+$.getJSON('/api/all-movies')
 .then((data) => {
   const { results } = data
 

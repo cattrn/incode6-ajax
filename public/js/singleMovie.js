@@ -1,7 +1,8 @@
 console.log(movie_id)
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w342'
 
 // load data for single movie onto the page
-$.getJSON(API_BASE_URL + `/movie/${movie_id}`, apiOptions)
+$.getJSON('/api/single-movie/' + movie_id)
 .then((movie) => {
   $("#title").text(movie.title)
   $("#poster").attr({
